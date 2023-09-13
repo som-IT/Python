@@ -1,0 +1,41 @@
+class BankAccount:
+    # constructor method
+    def __init__(self, account_number, account_holder, initial_balance=0):
+        self.account_number = account_number
+        self.account_holder = account_holder
+        self.balance = initial_balance
+
+    def deposit(self, amount):
+        if amount > 0:
+            self.balance += amount
+            print(f"Deposited: ${amount}, New balance: ${self.balance}")
+        else:
+            print("Please positive amount")
+
+    def withdraw(self, amount):
+        if amount >0 and amount <= self.balance:
+            self.balance -=amount
+            print(f"Withdrew: ${amount}, New balance: ${self.balance}")
+        elif amount > self.balance:
+            print("Sorry insufficient amount")
+        else:
+            print("Sorry insufficient amount withdraw not allowed")
+
+    def check_balance(self):
+        print(f"Account Number: {self.account_number}")
+        print(f"Account holder: {self.account_holder}")
+        print(f"Balance: ${self.balance}")
+        print("--------------------")
+
+
+#creating instance of a class --> object
+
+account1 = BankAccount(12345, "Abdi")
+account1.check_balance()
+account1.deposit(50)
+account1.withdraw(50)
+
+account2 = BankAccount(67890, "Ali", 200)
+account2.check_balance()
+account2.deposit(300)
+account2.withdraw(150)
