@@ -1,0 +1,61 @@
+class BankAccount:
+    # constructor method
+    def __init__(self, account_number, account_holder, initial_balance=0):
+        self.account_number = account_number
+        self.account_holder = account_holder
+        self.balance = initial_balance
+
+    def deposit(self, amount):
+        if amount > 0:
+            self.balance += amount
+            print(f"Deposited: ${amount}, New balance: ${self.balance}")
+        else:
+            print("Please positive amount")
+
+    def withdraw(self, amount):
+        if amount >0 and amount <= self.balance:
+            self.balance -=amount
+            print(f"Withdrew: ${amount}, New balance: ${self.balance}")
+        elif amount > self.balance:
+            print("Sorry insufficient amount")
+        else:
+            print("Sorry insufficient amount withdraw not allowed")
+
+    def check_balance(self):
+        print("--------------------")
+        print(f"Account Number: {self.account_number}")
+        print(f"Account holder: {self.account_holder}")
+        print(f"Balance: ${self.balance}")
+        print("--------------------")
+
+
+# creating CheckingAccount
+
+class CheckingAccount(BankAccount):
+    # constructor method
+    def __init__(self, account_number, account_holder, initial_balance=0, overdraft_limit= -100):
+        super().__init__(account_number, account_holder, initial_balance)
+        self.overdraft_limit = overdraft_limit
+
+    def withdraw(self, amount):
+        if amount > 0 and (self.balance - amount) >= self.overdraft_limit:
+            self.balance -=amount
+            print(f"Withdrew: ${amount}, New balance: ${self.balance}")
+        elif amount > 0 and (self.balance - amount) < self.overdraft_limit:
+            print("Withdraw amount exceeds overdraft limit")
+        else:
+            super().withdraw(amount)
+
+# creating instance of CheckingAccount
+
+checking_account = CheckingAccount(99887, "Hassan")
+
+# transactions
+
+checking_account.check_balance()
+checking_account.deposit(100)
+checking_account.withdraw(50)
+checking_account.withdraw(100)
+checking_account.withdraw(50)
+checking_account.withdraw(5)
+checking_account.check_balance()
