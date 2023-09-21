@@ -1,0 +1,39 @@
+class Person:
+    def __init__(self, name, age):
+        self.name = name
+        self.age = age
+
+    def greet(self):
+        print(f"Hello, my name is {self.name}, I am {self.age} years old")
+
+
+class Employee(Person):
+    def __init__(self, name, age, employee_id):
+        super().__init__(name, age)
+        self.employee_id = employee_id
+
+    def work(self):
+        print(
+            f"Hello, my name is {self.name}, I am {self.age} years old, my employee id is {self.employee_id}"
+        )
+
+
+class Manager(Employee):
+    def __init__(self, name, age, employee_id, department):
+        super().__init__(name, age, employee_id)
+        self.department = department
+
+    def manage(self):
+        print(
+            f"Hello, my name is {self.name}, I am {self.age} years old, my employee id is {self.employee_id}, my department is {self.department}"
+        )
+
+
+# creating objects
+person = Person("Abdi", 22)
+employee = Employee("Ali", 23, "e1001")
+manager = Manager("Hassan", 30, "e1002", "HR")
+
+person.greet()
+employee.work()
+manager.manage()
